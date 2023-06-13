@@ -1,6 +1,5 @@
 package space.spacelift.amqp
 
-import collection.JavaConversions._
 import com.rabbitmq.client.AMQP.BasicProperties
 import com.rabbitmq.client._
 import akka.actor._
@@ -10,6 +9,7 @@ import scala.util.Failure
 import scala.util.Success
 import akka.event.LoggingReceive
 import scala.collection.mutable
+import scala.jdk.CollectionConverters._
 
 object ChannelOwner {
 
@@ -18,6 +18,7 @@ object ChannelOwner {
   case object Disconnected extends State
 
   case object Connected extends State
+
 
   case class NotConnectedError(request: Request)
 
@@ -87,11 +88,11 @@ object ChannelOwner {
       }
       case request@QueueBind(queue, exchange, routingKey, args) => {
         log.debug("binding queue {} to key {} on exchange {}", queue, routingKey, exchange)
-        sender ! withChannel(channel, request)(c => c.queueBind(queue, exchange, routingKey, args))
+        sender ! withChannel(channel, request)(c => c.queueBind(queue, exchange, routingKey, args.asInstanceOf[Map[String, Object]].asJava))
       }
       case request@QueueUnbind(queue, exchange, routingKey, args) => {
         log.debug("unbinding queue {} to key {} on exchange {}", queue, routingKey, exchange)
-        sender ! withChannel(channel, request)(c => c.queueUnbind(queue, exchange, routingKey, args))
+        sender ! withChannel(channel, request)(c => c.queueUnbind(queue, exchange, routingKey, args.asInstanceOf[Map[String, Object]].asJava))
       }
       case request@Get(queue, autoAck) => {
         log.debug("getting from queue {} autoAck {}", queue, autoAck)
@@ -114,7 +115,7 @@ object ChannelOwner {
         })
       }
       case request@ConfirmSelect => {
-        sender ! withChannel(channel, request)(c => c.confirmSelect())
+        sender ! withChannel(channel, request.asInstanceOf[Request])(c => c.confirmSelect())
       }
       case request@AddConfirmListener(listener) => {
         sender ! withChannel(channel, request)(c => c.addConfirmListener(new ConfirmListener {
