@@ -2,7 +2,7 @@ name := "amqp-scala-client"
 
 organization := "com.depop"
 
-version := "2.2.0"
+version := "2.2.1"
 
 scalaVersion := "2.13.10"
 
@@ -39,7 +39,7 @@ publishConfiguration := publishConfiguration.value.withOverwrite(true)
 val akkaVersion   = "2.6.20"
 libraryDependencies ++=
     Seq(
-        "com.rabbitmq"           % "amqp-client"              % "4.0.2",
+        "com.rabbitmq"           % "amqp-client"              % "4.8.0",
         "com.typesafe.akka"      %% "akka-actor"              % akkaVersion % "provided",
         "com.typesafe.akka"      %% "akka-slf4j"              % akkaVersion % "test",
         "com.typesafe.akka"      %% "akka-testkit"            % akkaVersion  % "test",
