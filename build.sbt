@@ -1,8 +1,8 @@
 name := "amqp-scala-client"
 
-organization := "space.spacelift"
+organization := "com.depop"
 
-version := "2.1.1-SNAPSHOT"
+version := "2.2.0"
 
 scalaVersion := "2.13.10"
 
@@ -20,16 +20,18 @@ scalacOptions  ++= Seq("-unchecked", "-deprecation")
 
 publishMavenStyle := true
 
-publishTo := None
-//{
-  //val nexus = "https://oss.sonatype.org/"
-  //if (isSnapshot.value)
-    //Some("snapshots" at nexus + "content/repositories/snapshots")
-  //else
-    //Some("releases"  at nexus + "service/local/staging/deploy/maven2")
-//}
+publishTo := 
+{
+  val nexus = "https://depop.jfrog.io/artifactory/depop-scala-local/"
+  if (isSnapshot.value)
+    Some("snapshots" at nexus)
+  else
+    Some("releases"  at nexus)
+}
 
-//publishArtifact in Test := false
+publishArtifact in Test := false
+
+publishConfiguration := publishConfiguration.value.withOverwrite(true)
 
 //pomIncludeRepository := { _ => false }
 
@@ -37,11 +39,12 @@ publishTo := None
 val akkaVersion   = "2.6.20"
 libraryDependencies ++=
     Seq(
-        "com.rabbitmq"         % "amqp-client"          % "4.0.2",
-        "com.typesafe.akka"    %% "akka-actor"          % akkaVersion % "provided",
-        "com.typesafe.akka"    %% "akka-slf4j"          % akkaVersion % "test",
-        "com.typesafe.akka"    %% "akka-testkit"        % akkaVersion  % "test",
-        "org.scalatest"        %% "scalatest"           % "3.2.16" % "test",
-        "ch.qos.logback"       %  "logback-classic"     % "1.4.7" % "test",
-        "junit"           	   % "junit"                % "4.12" % "test"
+        "com.rabbitmq"           % "amqp-client"              % "4.0.2",
+        "com.typesafe.akka"      %% "akka-actor"              % akkaVersion % "provided",
+        "com.typesafe.akka"      %% "akka-slf4j"              % akkaVersion % "test",
+        "com.typesafe.akka"      %% "akka-testkit"            % akkaVersion  % "test",
+        "org.scala-lang.modules" %% "scala-collection-compat" % "2.10.0",
+        "org.scalatest"          %% "scalatest"               % "3.2.16" % "test",
+        "ch.qos.logback"         %  "logback-classic"         % "1.4.7" % "test",
+        "junit"           	     % "junit"                    % "4.12" % "test"
     )
