@@ -1,10 +1,11 @@
 package space.spacelift.amqp
 
-import collection.JavaConversions._
 import com.rabbitmq.client.AMQP.BasicProperties
 import com.rabbitmq.client.{AMQP, ShutdownSignalException, Channel, Envelope}
 import akka.actor.{Actor, Props, ActorRef, ActorRefFactory}
 import java.util.concurrent.CountDownLatch
+import java.lang.Object
+import scala.jdk.CollectionConverters._
 
 object Amqp {
 
@@ -29,7 +30,7 @@ object Amqp {
     if (q.passive)
       channel.queueDeclarePassive(q.name)
     else
-      channel.queueDeclare(q.name, q.durable, q.exclusive, q.autodelete, q.args)
+      channel.queueDeclare(q.name, q.durable, q.exclusive, q.autodelete, q.args.asInstanceOf[Map[String, Object]].asJava)
   }
 
   /**
@@ -53,7 +54,7 @@ object Amqp {
     if (e.passive)
       channel.exchangeDeclarePassive(e.name)
     else
-      channel.exchangeDeclare(e.name, e.exchangeType, e.durable, e.autodelete, e.args)
+      channel.exchangeDeclare(e.name, e.exchangeType, e.durable, e.autodelete, e.args.asInstanceOf[Map[String, Object]].asJava)
   }
 
   object StandardExchanges {
