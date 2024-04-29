@@ -2,12 +2,12 @@ package space.spacelift.amqp
 
 import com.rabbitmq.client.AMQP.BasicProperties
 import com.rabbitmq.client._
-import akka.actor._
+import org.apache.pekko.actor._
+import org.apache.pekko.event.LoggingReceive
 import space.spacelift.amqp.Amqp._
 import scala.util.Try
 import scala.util.Failure
 import scala.util.Success
-import akka.event.LoggingReceive
 import scala.collection.mutable
 import scala.jdk.CollectionConverters._
 

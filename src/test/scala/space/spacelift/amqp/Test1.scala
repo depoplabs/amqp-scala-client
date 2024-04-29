@@ -1,8 +1,8 @@
 package space.spacelift.amqp
 
-import akka.actor.{Props, Actor, ActorSystem}
-import space.spacelift.amqp.Amqp._
 import com.rabbitmq.client.ConnectionFactory
+import org.apache.pekko.actor.{Props, Actor, ActorSystem}
+import space.spacelift.amqp.Amqp._
 import scala.concurrent.duration._
 
 object Test1 extends App {

@@ -1,12 +1,9 @@
 package space.spacelift.amqp
 
-import akka.testkit.TestProbe
+import org.apache.pekko.testkit.TestProbe
 import space.spacelift.amqp.Amqp._
 import concurrent.duration._
-import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
 
-@RunWith(classOf[JUnitRunner])
 class ConsumerSpec extends ChannelSpec {
   "Consumers" should {
     "receive messages sent by producers" in {

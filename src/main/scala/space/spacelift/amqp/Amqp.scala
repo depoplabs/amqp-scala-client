@@ -2,7 +2,7 @@ package space.spacelift.amqp
 
 import com.rabbitmq.client.AMQP.BasicProperties
 import com.rabbitmq.client.{AMQP, ShutdownSignalException, Channel, Envelope}
-import akka.actor.{Actor, Props, ActorRef, ActorRefFactory}
+import org.apache.pekko.actor.{Actor, Props, ActorRef, ActorRefFactory}
 import java.util.concurrent.CountDownLatch
 import java.lang.Object
 import scala.jdk.CollectionConverters._
@@ -199,7 +199,7 @@ object Amqp {
     * <li>for a connection actor, connected means that it is connected to the AMQP broker</li>
     * <li>for a channel actor, connected means that it is has a valid channel (sent by its connection parent)</li>
     * </ul>
-    * this is a simple wrapper around the FSM state monitoring tools provided by Akka, since ConnectionOwner and ChannelOwner
+    * this is a simple wrapper around the FSM state monitoring tools provided by Pekko, since ConnectionOwner and ChannelOwner
     * are state machines with 2 states (Disconnected and Connected)
     * @param actorRefFactory actor capable of creating child actors (will be used to create a temporary watcher)
     * @param channelOrConnectionActor reference to a ConnectionOwner or ChannelOwner actor

@@ -1,10 +1,10 @@
 package space.spacelift.amqp
 
 import Amqp._
-import akka.actor.{UnboundedStash, Props, ActorRef}
 import com.rabbitmq.client.{Envelope, Channel, DefaultConsumer}
 import com.rabbitmq.client.AMQP.BasicProperties
-import akka.event.LoggingReceive
+import org.apache.pekko.actor.{UnboundedStash, Props, ActorRef}
+import org.apache.pekko.event.LoggingReceive
 
 import scala.jdk.CollectionConverters._
 

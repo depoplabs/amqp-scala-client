@@ -4,9 +4,9 @@ organization := "com.depop"
 
 version := "2.2.1"
 
-scalaVersion := "2.13.10"
+scalaVersion := "2.13.13"
 
-crossScalaVersions := Seq("2.12.18", "2.13.10")
+crossScalaVersions := Seq("2.12.18", "2.13.13")
 
 scalacOptions  ++= Seq("-feature", "-language:postfixOps")
 
@@ -36,15 +36,14 @@ publishConfiguration := publishConfiguration.value.withOverwrite(true)
 //pomIncludeRepository := { _ => false }
 
 
-val akkaVersion   = "2.6.20"
+val pekkoVersion   = "1.0.2"
 libraryDependencies ++=
     Seq(
         "com.rabbitmq"           % "amqp-client"              % "4.8.0",
-        "com.typesafe.akka"      %% "akka-actor"              % akkaVersion % "provided",
-        "com.typesafe.akka"      %% "akka-slf4j"              % akkaVersion % "test",
-        "com.typesafe.akka"      %% "akka-testkit"            % akkaVersion  % "test",
+        "org.apache.pekko"       %% "pekko-actor"             % pekkoVersion % "provided",
+        "org.apache.pekko"       %% "pekko-slf4j"             % pekkoVersion % "test",
+        "org.apache.pekko"       %% "pekko-testkit"           % pekkoVersion % "test",
         "org.scala-lang.modules" %% "scala-collection-compat" % "2.10.0",
-        "org.scalatest"          %% "scalatest"               % "3.2.16" % "test",
-        "ch.qos.logback"         %  "logback-classic"         % "1.4.7" % "test",
-        "junit"           	     % "junit"                    % "4.12" % "test"
+        "org.scalatest"          %% "scalatest"               % "3.2.18" % "test",
+        "ch.qos.logback"         %  "logback-classic"         % "1.4.7" % "test"
     )

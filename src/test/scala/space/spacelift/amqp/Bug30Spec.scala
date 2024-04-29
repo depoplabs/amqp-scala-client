@@ -1,10 +1,8 @@
 package space.spacelift.amqp
 
-import org.scalatest.junit.JUnitRunner
-import org.junit.runner.RunWith
-import akka.testkit.TestProbe
+import org.apache.pekko.testkit.TestProbe
+import org.apache.pekko.actor.{Props, ActorLogging, ActorRef, Actor}
 import space.spacelift.amqp.Amqp._
-import akka.actor.{Props, ActorLogging, ActorRef, Actor}
 import scala.concurrent.duration._
 import space.spacelift.amqp.Amqp.Ack
 import space.spacelift.amqp.Amqp.Publish
@@ -61,7 +59,6 @@ object Bug30Spec {
  * "pending acks" means Acks that are send that after the original consumer's channel crashed but refer to delivery
  * tags created by the channel that crashed.
  */
-@RunWith(classOf[JUnitRunner])
 class Bug30Spec extends ChannelSpec {
   "ChannelOwner" should {
     "redefine consumers when a channel fails" in {

@@ -1,19 +1,17 @@
 package space.spacelift.amqp
 
-import org.scalatest.junit.JUnitRunner
-import org.junit.runner.RunWith
-import akka.testkit.TestProbe
-import akka.actor.{Props, Actor, DeadLetter}
-import akka.pattern.gracefulStop
+import com.rabbitmq.client.AMQP.Queue
+import com.rabbitmq.client.GetResponse
+import org.apache.pekko.testkit.TestProbe
+import org.apache.pekko.actor.{Props, Actor, DeadLetter}
+import org.apache.pekko.pattern.gracefulStop
+import org.scalatest.matchers.should.Matchers._
+import space.spacelift.amqp.Amqp._
+import space.spacelift.amqp.ChannelOwner.NotConnectedError
 import java.util.concurrent.{CountDownLatch, TimeUnit}
 import concurrent.duration._
-import com.rabbitmq.client.AMQP.Queue
-import space.spacelift.amqp.Amqp._
-import com.rabbitmq.client.GetResponse
-import space.spacelift.amqp.ChannelOwner.NotConnectedError
 import scala.concurrent.Await
 
-@RunWith(classOf[JUnitRunner])
 class ChannelOwnerSpec extends ChannelSpec  {
   "ChannelOwner" should {
 

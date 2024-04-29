@@ -1,11 +1,11 @@
 package space.spacelift.amqp
 
 import Amqp._
-import akka.actor._
-import akka.event.LoggingReceive
-import akka.pattern.ask
-import akka.util.Timeout
 import com.rabbitmq.client.{Connection, ConnectionFactory, DefaultSaslConfig, ShutdownListener, ShutdownSignalException, Address => RMQAddress}
+import org.apache.pekko.actor._
+import org.apache.pekko.event.LoggingReceive
+import org.apache.pekko.pattern.ask
+import org.apache.pekko.util.Timeout
 
 import scala.concurrent.Await
 import concurrent.duration._
