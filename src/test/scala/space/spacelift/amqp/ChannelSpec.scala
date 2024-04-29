@@ -1,19 +1,19 @@
 package space.spacelift.amqp
 
-import akka.testkit.{ImplicitSender, TestKit}
-import akka.actor.{ActorRef, ActorSystem}
-import akka.util.Timeout
-import akka.pattern.gracefulStop
-import org.scalatest.{BeforeAndAfter, WordSpecLike}
-import org.scalatest.Matchers
+import com.rabbitmq.client.ConnectionFactory
+import org.apache.pekko.actor.{ActorRef, ActorSystem}
+import org.apache.pekko.pattern.gracefulStop
+import org.apache.pekko.testkit.{ImplicitSender, TestKit}
+import org.apache.pekko.util.Timeout
+import org.scalatest.BeforeAndAfter
+import org.scalatest.wordspec.AnyWordSpecLike
+import space.spacelift.amqp.Amqp._
 import java.util.concurrent.TimeUnit
 import scala.concurrent.Await
 import scala.concurrent.duration._
-import com.rabbitmq.client.ConnectionFactory
-import space.spacelift.amqp.Amqp._
 import scala.util.Random
 
-class ChannelSpec extends TestKit(ActorSystem("TestSystem")) with WordSpecLike with Matchers with BeforeAndAfter with ImplicitSender {
+class ChannelSpec extends TestKit(ActorSystem("TestSystem")) with AnyWordSpecLike with BeforeAndAfter with ImplicitSender {
   implicit val timeout = Timeout(5 seconds)
   val connFactory = new ConnectionFactory()
   val uri = system.settings.config.getString("amqp-scala-client-test.rabbitmq.uri")

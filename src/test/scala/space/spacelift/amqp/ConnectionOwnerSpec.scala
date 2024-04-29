@@ -1,22 +1,19 @@
 package space.spacelift.amqp
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpecLike
-import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
-import akka.testkit.{ImplicitSender, TestKit, TestProbe}
-import akka.actor.ActorSystem
-import akka.pattern.gracefulStop
-import akka.util.Timeout
-import concurrent.duration._
-import concurrent.Await
-import com.rabbitmq.client.{ConnectionFactory, Address, Channel}
 import Amqp._
 import ConnectionOwner.{Connected, CreateChannel, Disconnected}
+import com.rabbitmq.client.{ConnectionFactory, Address, Channel}
+import org.apache.pekko.actor.ActorSystem
+import org.apache.pekko.pattern.gracefulStop
+import org.apache.pekko.testkit.{ImplicitSender, TestKit, TestProbe}
+import org.apache.pekko.util.Timeout
+import org.scalatest.matchers.should.Matchers._
+import org.scalatest.wordspec.AnyWordSpecLike
+import concurrent.duration._
+import concurrent.Await
 import java.util.concurrent.TimeUnit
 
-@RunWith(classOf[JUnitRunner])
-class ConnectionOwnerSpec extends TestKit(ActorSystem("TestSystem")) with WordSpecLike with Matchers with ImplicitSender {
+class ConnectionOwnerSpec extends TestKit(ActorSystem("TestSystem")) with AnyWordSpecLike with ImplicitSender {
   implicit val timeout = Timeout(5 seconds)
 
   "ConnectionOwner" should {

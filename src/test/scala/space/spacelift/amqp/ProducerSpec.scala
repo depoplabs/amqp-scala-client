@@ -1,16 +1,13 @@
 package space.spacelift.amqp
 
-import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
-import akka.testkit.TestProbe
-import concurrent.duration._
 import com.rabbitmq.client.AMQP.BasicProperties
+import org.apache.pekko.testkit.TestProbe
 import space.spacelift.amqp.Amqp._
 import space.spacelift.amqp.Amqp.Publish
 import space.spacelift.amqp.Amqp.Binding
 import space.spacelift.amqp.Amqp.Delivery
+import concurrent.duration._
 
-@RunWith(classOf[JUnitRunner])
 class ProducerSpec extends ChannelSpec {
   "Producers" should {
     "be able to specify custom message properties" in {

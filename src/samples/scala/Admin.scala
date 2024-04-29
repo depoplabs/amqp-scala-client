@@ -1,11 +1,11 @@
 package samples
 
-import akka.actor.{ActorRef, Actor, Props, ActorSystem}
+import com.rabbitmq.client.AMQP.Queue
+import com.rabbitmq.client.ConnectionFactory
+import org.apache.pekko.actor.{ActorRef, Actor, Props, ActorSystem}
 import space.spacelift.amqp.Amqp.{AddStatusListener, QueueParameters, DeclareQueue}
 import space.spacelift.amqp.ConnectionOwner.Create
 import space.spacelift.amqp.{ConnectionOwner, Amqp, ChannelOwner}
-import com.rabbitmq.client.AMQP.Queue
-import com.rabbitmq.client.ConnectionFactory
 import concurrent.duration._
 
 class AdminActor extends Actor {
