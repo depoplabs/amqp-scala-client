@@ -2,7 +2,7 @@ name := "amqp-scala-client"
 
 organization := "com.depop"
 
-version := "2.2.1"
+version := "3.0.0"
 
 scalaVersion := "2.13.13"
 
